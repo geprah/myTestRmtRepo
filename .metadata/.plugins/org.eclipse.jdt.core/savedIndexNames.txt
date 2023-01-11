@@ -15,4 +15,3 @@ INDEX VERSION 1.131+/home/georgeprahvodaf/Documents/myFirstRepository/.metadata/
 3530540584.index
 2253745042.index
 3883508318.index
-2675922998.index
