@@ -1,6 +1,6 @@
 package com;
 class Booking implements Runnable {
-	int avl  = 1;
+	int avl  = 3;
 	
 	@Override
 	public  void run() {
@@ -12,7 +12,7 @@ class Booking implements Runnable {
 	Thread.sleep(500);
 	}catch(Exception e) {}
 	synchronized (this) {
-		if(avl==1) {
+		if(avl>=1) {
 			System.out.println(name+" got the ticket");
 			avl=avl-1;
 		}	else {
