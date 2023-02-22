@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>SimpleServletApp</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>logindb.html</welcome-file>
     <welcome-file>home.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>default.html</welcome-file>
@@ -19,17 +19,34 @@
     <servlet-name>Demo</servlet-name>
     <url-pattern>/Hi</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
+    <servlet-name>A</servlet-name>
     <servlet-class>com.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
+    <servlet-name>A</servlet-name>
+    <url-pattern>/CheckLogin</url-pattern>
   </servlet-mapping>
-  
-  
+  <servlet>
+    <description></description>
+    <display-name>Home</display-name>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>com.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginDbServlet</display-name>
+    <servlet-name>LoginDbServlet</servlet-name>
+    <servlet-class>com.LoginDbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginDbServlet</servlet-name>
+    <url-pattern>/LoginDbServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
