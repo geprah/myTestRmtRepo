@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginDbServlet
@@ -31,8 +32,9 @@ public class LoginDbServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter pw = res.getWriter();
 		res.setContentType("text/html");
-	String emailid = req.getParameter("emailid");
+String emailid = req.getParameter("emailid");
 	String password = req.getParameter("pass");
+			HttpSession hs = req.getSession();
 		RequestDispatcher rd1 = req.getRequestDispatcher("logindb.html");
 		RequestDispatcher rd2 = req.getRequestDispatcher("Home");
 		try {
@@ -45,10 +47,13 @@ con.prepareStatement("select * from login where emailid=? and password = ?");
 			pstmt.setString(2, password);
 	ResultSet rs = pstmt.executeQuery();
 	if(rs.next()) {
-		rd2.forward(req, res);
+	req.setAttribute("name", emailid);	
+	hs.setAttribute("name", emailid);
+			//rd2.forward(req, res);
+	res.sendRedirect("Home");
 	}else {
 		pw.print("Failure try once again");
-		rd1.include(req, res);
+			rd1.include(req, res);
 	}
 		} catch (Exception e) {
 		pw.print(e);
