@@ -1,0 +1,125 @@
+*****MODELING*****
+//Teacher can handle more than one subject
+//Teacher can teach more than one student
+Teacher{
+teacherId
+teacherName
+}
+
+
+Subject{
+subjectId
+subjectName
+teacherId_fk
+primary key(subjectId,teacherId)
+}
+
+Class{
+classId 
+classSection
+subjectId_fk
+primary key(classId)
+}
+
+//Student can study more than one subject
+//Student can have only one class(therefore one teacher)
+Students{
+studentId
+studentName
+classId_fk
+}
+
+*****END OF MODELING*****
+
+*****IMPLEMENTING DB*****
+create database ladb;
+use ladb;
+
+create table Teacher(teacherId int auto_increment, 
+teacherName varchar(20), primary key(teacherId));
+
+create table Subject(subjectId int auto_increment,
+subjectName varchar(20), teacherId int,
+foreign key (teacherId) references Teacher(teacherId),
+primary key(subjectId,teacherId));
+
+create table Class(classId int auto_increment,
+classSection varchar(20),subjectId int,
+foreign key(subjectId) references Subject(subjectId),
+primary key(classId,subjectId));
+
+create table Student(studentId int auto_increment,
+studentName varchar(20), classId int, 
+foreign key (classId) references Class(classId), 
+primary key(studentId));
+
+*****IMPLEMENTING DB*****
+
+*****MODELING SAMPLE VALUES*****
+Teacher(Charles,Richard,John,Kwadwo)
+Subject(Telecom,VAS,IN,Java)
+Class(1A,1B)
+Student(George,Muriel,Nana,Jordan)
+SubjectToClass(
+	{1A,Telecom},{1B,Telecom},
+	{1A,VAS},{1B,VAS},
+	{1A,IN},{1B,IN},
+	{1A,Java},{1B,Java})
+TeacherToClass(
+	{Charles,{1A,Telecom}},{Charles,{1B,Telecom}},
+	{Charles,{1A,VAS}},{Charles,{1B,VAS}})
+StudentToClass(
+	{George,1A},{Muriel,1B},{Nana,1A},{Jordan,1B}
+	{Henry,2A},{Catherine,2B},{Emmanuel,2A},{Philip,2B})
+
+*****END OF MODELING SAMPLE VALUES*****
+
+*****SETTING UP MASTER LIST******
+insert into Teacher(teacherName) values("Charles");
+insert into Teacher(teacherName) values("Richard");
+insert into Teacher(teacherName) values("John");
+insert into Teacher(teacherName) values("Kwadwo");
+
+insert into Subject(subjectName,teacherId) values("Telecom",1);
+insert into Subject(subjectName,teacherId) values("VAS",2);
+insert into Subject(subjectName,teacherId) values("IN",3);
+insert into Subject(subjectName,teacherId) values("JAVA",4);
+
+insert into Class(classSection,subjectId) values("A",1);
+insert into Class(classSection,subjectId) values("B",1);
+insert into Class(classSection,subjectId) values("A",2);
+insert into Class(classSection,subjectId) values("B",2);
+insert into Class(classSection,subjectId) values("A",3);
+insert into Class(classSection,subjectId) values("B",3);
+insert into Class(classSection,subjectId) values("A",4);
+insert into Class(classSection,subjectId) values("B",4);
+
+insert into Student(studentName,classId) values("George",1);
+insert into Student(studentName,classId) values("Muriel",2);
+insert into Student(studentName,classId) values("Nana",1);
+insert into Student(studentName,classId) values("Jordan",2);
+insert into Student(studentName,classId) values("Henry",3);
+insert into Student(studentName,classId) values("Catherine",4);
+insert into Student(studentName,classId) values("Emmanuel",3);
+insert into Student(studentName,classId) values("Philip",4);
+
+
+*****END OF SETTING UP MASTER LIST******
+
+********TESTING*********
+
+select Student.classId,Class.classSection,Student.studentName 
+from Student, Class 
+where Class.classId=Student.classId;
++---------+--------------+-------------+
+| classId | classSection | studentName |
++---------+--------------+-------------+
+|       1 | A            | George      |
+|       2 | B            | Muriel      |
+|       1 | A            | Nana        |
+|       2 | B            | Jordan      |
+|       3 | A            | Henry       |
+|       4 | B            | Catherine   |
+|       3 | A            | Emmanuel    |
+|       4 | B            | Philip      |
++---------+--------------+-------------+
