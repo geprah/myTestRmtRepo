@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.SQLTimeoutException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,6 +59,7 @@ public class LaAdminPortalController extends HttpServlet {
 				rd.include(request, response);
 				pw.println("Added "+pstmt.executeUpdate()+" teacher");
 				break;
+				
 			case "Add Subject":
 				pw.println("Adding Subject");
 				pstmt = LaDbConnection.getLaDbConn().prepareStatement("insert into Subject(subjectName,teacherId) values(?,?)");
@@ -72,14 +70,32 @@ public class LaAdminPortalController extends HttpServlet {
 				rd = request.getRequestDispatcher("addSubject.jsp");
 				rd.include(request, response);
 				pw.println("Added "+pstmt.executeUpdate()+" subject");
-				
 				break;
+				
 			case "Add Class":
 				pw.println("Adding Class");
+				pstmt = LaDbConnection.getLaDbConn().prepareStatement("insert into Class(classSection,subjectId) values(?,?)");
+				pstmt.setString(1, request.getParameter("classSection"));
+				pstmt.setString(2, request.getParameter("subjectId"));
+				
+				response.setContentType("text/html");
+				rd = request.getRequestDispatcher("addClass.jsp");
+				rd.include(request, response);
+				pw.println("Added "+pstmt.executeUpdate()+" class");
 				break;
+				
 			case "Add Student":
 				pw.println("Adding Student");
+				pstmt = LaDbConnection.getLaDbConn().prepareStatement("insert into Student(studenttName,classId) values(?,?)");
+				pstmt.setString(1, request.getParameter("studentName"));
+				pstmt.setString(2, request.getParameter("classId"));
+				
+				response.setContentType("text/html");
+				rd = request.getRequestDispatcher("addStudent.jsp");
+				rd.include(request, response);
+				pw.println("Added "+pstmt.executeUpdate()+" student");
 				break;
+				
 			default:
 				
 		}

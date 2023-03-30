@@ -15,7 +15,7 @@
 	<input type="text" name="subjectName" maxlength="20"><br/>
 		
 	<jsp:include page="/ListService" flush="true" >
-   		<jsp:param name="listOperation" value="View Teachers" />
+   		<jsp:param name="listOperation" value="View Teacher" />
    	</jsp:include>
 	
 	<label>Assign Teacher</label>
@@ -27,12 +27,14 @@
 	</select><br/>
 	<% }
 	else{ %>
-		<input type="text" disabled="disabled" value="Add a teacher first."><br/>
+		<input type="text" disabled="disabled" value="No teacher added."><br/>
 	<%} %>
 	<input type="submit" value="Add Subject">
 	<input type="reset" value="Reset">
 	<input type="hidden" name="addOperation" value="Add Subject">
-</form>
+</form><br/>
+
+<a href="index.jsp">Go to home</a><br>
 
 </body>
 </html>

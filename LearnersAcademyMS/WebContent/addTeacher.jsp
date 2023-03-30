@@ -16,7 +16,9 @@
 	<input type="submit" value="Add Teacher">
 	<input type="reset" value="Reset">
 	<input type="hidden" name="addOperation" value="Add Teacher">
-</form>
+</form><br/>
+
+<a href="index.jsp">Go to home</a><br>
 
 </body>
 </html>
