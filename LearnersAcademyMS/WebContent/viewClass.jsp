@@ -35,5 +35,8 @@ else{ %>
 <h4>No class added</h4>
 <%} %>
 
+<br/>
+<a href="home.jsp">Go to home</a>
+
 </body>
 </html>

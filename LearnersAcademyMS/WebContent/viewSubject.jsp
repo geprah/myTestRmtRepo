@@ -35,5 +35,8 @@ else{ %>
 <h4>No Subjects added</h4>
 <%} %>
 
+<br/>
+<a href="home.jsp">Go to home</a>
+
 </body>
 </html>

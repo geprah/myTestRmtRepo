@@ -13,15 +13,17 @@
 <h4>george.prah@vodafone.com</h4>
 <br>
 <br>
-<a href="addTeacher.jsp">Add Teacher</a><br>
-<a href="addSubject.jsp">Add Subject</a><br>
-<a href="addClass.jsp">Add Class</a><br>
-<a href="addStudent.jsp">Add Student</a><br>
+<h4>Login</h4>
+<form action="LaAdminPortalController" method="post">
+<label>User name:</label>
+<input type="text" name="userName" required></input>
 <br>
+<label>Password:</label>
+<input type="password" name="passWord" required></input>
 <br>
-<a href="viewTeacher.jsp">View Teachers</a><br>
-<a href="viewSubject.jsp">View Subjects</a><br>
-<a href="viewClass.jsp">View Classes</a><br>
-<a href="viewStudent.jsp">View Students</a><br>
+<input type="submit" value="Login"/>
+<input type="reset" value="Reset"/>
+<input type="hidden" name="addOperation" value="Login">
+</form>
 </body>
 </html>

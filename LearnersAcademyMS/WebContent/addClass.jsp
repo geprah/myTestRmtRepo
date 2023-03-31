@@ -34,7 +34,7 @@
 	<input type="hidden" name="addOperation" value="Add Class">
 	</form><br/>
 	
-	<a href="index.jsp">Go to home</a><br>
+	<a href="home.jsp">Go to home</a><br>
 	
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,13 +46,38 @@ public class LaAdminPortalController extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String submitButton = "";
 		PreparedStatement pstmt;
+		ResultSet rs;
 		submitButton = request.getParameter("addOperation");
 		try {
 		switch (submitButton) {
 		
+			case "Login":
+				
+				pstmt = LaDbConnection.getLaDbConn().prepareStatement(
+						"select * from Login where userName=? and passWord=?");
+				pstmt.setString(1, request.getParameter("userName"));
+				pstmt.setString(2, request.getParameter("passWord"));
+				response.setContentType("text/html");
+				
+				pstmt.execute();
+				rs = pstmt.getResultSet();
+				
+				if (rs.next()) {
+					
+					rd = request.getRequestDispatcher("home.jsp");
+					rd.forward(request, response);
+				}else {
+					
+					rd = request.getRequestDispatcher("index.jsp");
+					rd.include(request, response);
+					pw.println("<br/>Login failed!. <br/>Please retry with correct credentials");
+				}
+				break;
+		
 			case "Add Teacher":
-				pw.println("Adding Teacher");
-				pstmt = LaDbConnection.getLaDbConn().prepareStatement("insert into Teacher(teacherName) values(?)");
+				//pw.println("Adding Teacher");
+				pstmt = LaDbConnection.getLaDbConn().prepareStatement(
+						"insert into Teacher(teacherName) values(?)");
 				pstmt.setString(1, request.getParameter("teacherName"));
 				
 				response.setContentType("text/html");
@@ -62,7 +88,8 @@ public class LaAdminPortalController extends HttpServlet {
 				
 			case "Add Subject":
 				pw.println("Adding Subject");
-				pstmt = LaDbConnection.getLaDbConn().prepareStatement("insert into Subject(subjectName,teacherId) values(?,?)");
+				pstmt = LaDbConnection.getLaDbConn().prepareStatement(
+						"insert into Subject(subjectName,teacherId) values(?,?)");
 				pstmt.setString(1, request.getParameter("subjectName"));
 				pstmt.setString(2, request.getParameter("teacherId"));
 				
@@ -74,7 +101,8 @@ public class LaAdminPortalController extends HttpServlet {
 				
 			case "Add Class":
 				pw.println("Adding Class");
-				pstmt = LaDbConnection.getLaDbConn().prepareStatement("insert into Class(classSection,subjectId) values(?,?)");
+				pstmt = LaDbConnection.getLaDbConn().prepareStatement(
+						"insert into Class(classSection,subjectId) values(?,?)");
 				pstmt.setString(1, request.getParameter("classSection"));
 				pstmt.setString(2, request.getParameter("subjectId"));
 				
@@ -86,7 +114,8 @@ public class LaAdminPortalController extends HttpServlet {
 				
 			case "Add Student":
 				pw.println("Adding Student");
-				pstmt = LaDbConnection.getLaDbConn().prepareStatement("insert into Student(studenttName,classId) values(?,?)");
+				pstmt = LaDbConnection.getLaDbConn().prepareStatement(
+						"insert into Student(studenttName,classId) values(?,?)");
 				pstmt.setString(1, request.getParameter("studentName"));
 				pstmt.setString(2, request.getParameter("classId"));
 				

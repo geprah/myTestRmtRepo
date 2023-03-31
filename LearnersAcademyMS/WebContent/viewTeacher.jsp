@@ -33,5 +33,8 @@ else{ %>
 <h4>No Teachers added</h4>
 <%} %>
 
+<br/>
+<a href="home.jsp">Go to home</a>
+
 </body>
 </html>

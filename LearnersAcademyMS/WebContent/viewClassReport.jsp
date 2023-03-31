@@ -28,9 +28,9 @@
   	<tr>
     	<td>${classReport.id}</td>
     	<td>${classReport.classSection}</td>
-<%--     	<td>${classReport.teacherName}</td> --%>
-<%--     	<td>${classReport.subjectName}</td> --%>
-<%--     	<td>${classReport.studentName}</td> --%>
+     	<td>${classReport.teacherName}</td>
+     	<td>${classReport.subjectName}</td> 
+     	<td>${classReport.studentName}</td> 
     </tr>
   </c:forEach>
   </table><br/>
@@ -39,5 +39,7 @@ else{ %>
 <h4>No class added</h4>
 <%} %>
 
+<br/>
+<a href="home.jsp">Go to home</a>
 </body>
 </html>

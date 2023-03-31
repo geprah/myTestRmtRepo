@@ -65,11 +65,11 @@ public class ClassReport {
 	public ClassReport(int id, String classSection, String teacherName, String subjectName) {
 		
 		this(id, classSection, teacherName);
-		this.setTeacherName(subjectName);
+		this.setSubjectName(subjectName);
 	}
 	
 	public ClassReport(int id, String classSection, String teacherName, 
-			String subjectName, String StudentName) {
+			String subjectName, String studentName) {
 		
 		this(id, classSection, teacherName, subjectName);
 		this.setStudentName(studentName);
